@@ -1,0 +1,28 @@
+Statuses voor malfunctions
+    - Critical
+    - Major
+    - Minor
+    - Trivial
+
+Machines
+    - Premix Preparator 
+    - Moulding Line
+    - Extractor
+    - Moisturizer
+    - Packaging
+    - Heat Oven
+
+ 
+
+
+fabriekslocaties:
+
+- werkruimte alpha
+
+- werkruimte bravo
+
+- lab
+
+ 
+
+iedere machine bevind zich in één van deze locaties 

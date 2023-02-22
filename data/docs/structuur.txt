@@ -1,0 +1,51 @@
+Werkproces 1: Plant werkzaamheden en bewaakt de voortgang     
+
+- User stories
+- Planning
+- Prioriteiten stellen
+
+Werkproces 2: Ontwerpt software
+
+- Ontwerp past bij user stories
+- Schematechnieken (bijv.: activiteitendiagram en ERD)
+- Je kunt je ontwerp onderbouwen
+- Houdt rekening met onderwerpen als: ethiek, privacy, security
+
+Werkproces 3: Realiseert (onderdelen van) software
+
+- Voldoende user stories afgerond
+ > Ten minste de kern van de applicatie is af
+ > Voldoet aan de gestelde eisen uit je user stories
+
+- Kwalitatieve code, denk aan:
+ > Validatie
+ > Efficiëntie
+ > Security
+ > Nette foutafhandeling
+ > Conventies aangehouden
+ > Commentaar
+
+- Je past versiebeheer toe (bijv.: Git)
+
+Werkproces 4: Test software
+
+- Testplan
+ > Testcases sluiten aan op user stories
+ > Alle scenarios beschreven (Hoofdscenarios + alternatieve scenarios)
+ > Happy-path
+ > Edge-cases beschreven
+
+- Testscenarios zijn volledig beschreven
+ > Instructies voor tester
+ > Gewenst resultaat beschreven
+ > Testdata meegeleverd
+
+- Testrapport
+ > Resultaten verzameld
+ > Conclusies over tests
+
+Werkproces 5: Doet verbetervoorstellen voor de software
+
+- Verbetervoorstel n.a.v. tests
+- Verbetervoorstel n.a.v. oplevering
+- Verbetervoorstellen n.a.v. Reflectie (groep + individueel)
