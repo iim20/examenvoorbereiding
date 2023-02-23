@@ -1,3 +1,18 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+    --white: #ffffff;
+    --blue: #0040C0;
+    --black: #161616;
+}
+.active{
+    padding: 0.5rem;
+    text-align: center;
+    border-radius: .5rem;
+    background-color: var(--blue);
+}
+a.active{
+    color: var(--white);
+}

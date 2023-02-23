@@ -16,3 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('pages.dashboard');
 });
+
+Route::get('/storingen', function () {
+    return view('pages.storingen');
+});
+
+Route::get('/medewerkers', function () {
+    return view('pages.medewerkers');
+});
