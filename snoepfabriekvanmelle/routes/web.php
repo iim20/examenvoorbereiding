@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\StoringController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,13 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('pages.dashboard');
-});
 
-Route::get('/storingen', function () {
-    return view('pages.storingen');
-});
+Route::get('/', [DashboardController::class, 'index']);
+// Route::put('/', [DashboardController::class, 'updatestatus'])->name('dashboard.updatestatus');
+
+
+Route::resource('storingen', StoringController::class);
+
 
 Route::get('/medewerkers', function () {
     return view('pages.medewerkers');
