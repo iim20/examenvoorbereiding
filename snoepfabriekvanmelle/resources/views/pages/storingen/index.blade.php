@@ -21,9 +21,9 @@
             <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50" role="alert">
               <span class="font-medium">{{ session('success') }}</span>
             </div>
-        @elseif(session('destroy'))
-            <div class="p-4 mb-4 text-sm text-white rounded-lg bg-blue" role="alert">
-                <span class="font-medium">{{ session('destroy') }}</span>
+        @elseif(session('destroy') ?? session('error'))
+            <div class="p-4 mb-4 text-sm text-white rounded-lg bg-red-600" role="alert">
+                <span class="font-medium">{{ session('destroy') ?? session('error') }}</span>
             </div>
         @endif
 

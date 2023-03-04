@@ -75,7 +75,7 @@ class StoringController extends Controller
         $storing->statusupdate_id = $request->statusupdate_id;
         $storing->description = $request->description;
         $storing->save();
-        return redirect('/')->with('success', 'Storing is afgehandeld!');
+        return redirect('/')->with('success', 'Storing is updated!');
     }
 
     /**
@@ -84,7 +84,11 @@ class StoringController extends Controller
     public function destroy(Storing $storing, $id)
     {
         $storing = Storing::findOrFail($id);
-        $storing::destroy($id);
-        return redirect('storingen')->with('destroy', 'Storing is verwijderd!');
+        if ($storing->statusupdate_id != 1) {
+            $storing::destroy($id);
+            return redirect('storingen')->with('destroy', 'Storing is verwijderd!');
+        } else {
+            return redirect('storingen')->with('error', 'Storing kan niet worden verwijderd omdat de storing OPEN!');
+        }
     }
 }
