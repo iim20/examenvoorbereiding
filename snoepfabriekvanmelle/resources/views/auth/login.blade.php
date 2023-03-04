@@ -1,8 +1,11 @@
-<x-guest-layout>
+@extends('layouts.app')
+
+@section('content')
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
+    <div class="flex justify-center items-center min-h-[75vh]">
 
-    <form method="POST" action="{{ route('login') }}">
+    <form class="bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700 hover:bg-gradient-to-br  shadow-lg shadow-blue-500/50 rounded-lg p-32" method="POST" action="{{ route('login') }}">
         @csrf
 
         <!-- Email Address -->
@@ -44,4 +47,6 @@
             </x-primary-button>
         </div>
     </form>
-</x-guest-layout>
+    </div>
+
+@endsection

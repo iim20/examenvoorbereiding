@@ -9,7 +9,7 @@
       @if (Route::has('login'))
         @auth
           <a href="{{ route('storingen.index') }}" class="{{ request()->is('storingen*', 'create') ? 'active' : '' }} text-lg font-medium leading-6 text-gray-900">Storingen</a>
-          <a href="medewerkers" class="{{ request()->is('medewerkers') ? 'active' : '' }} text-lg font-medium leading-6 text-gray-900">Medewerkers</a>
+          <a href="/medewerkers" class="{{ request()->is('medewerkers') ? 'active' : '' }} text-lg font-medium leading-6 text-gray-900">Medewerkers</a>
           <span class="hidden opacity-25 md:block text-2xl">|</span>
           <form action="{{ route('logout') }}" method="post">
             @csrf

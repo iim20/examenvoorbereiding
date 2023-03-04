@@ -20,12 +20,20 @@ Route::get('/welcome', function () {
 });
 
 
-Route::get('/', [DashboardController::class, 'index']);
+Route::get('/', [DashboardController::class, 'index'])->name('dashboard.index');
 Route::patch('/{id}', [DashboardController::class, 'update'])->name('dashboard.update');
 Route::middleware('auth')->group(function () {
 
     Route::resource('storingen', StoringController::class);
 
+});
+
+Route::get('/medewerkers', function () {
+    return view('pages.medewerkers');
+});
+
+Route::fallback(function () {
+    abort(404);
 });
 
 
