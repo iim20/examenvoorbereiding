@@ -1,6 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
+
+    @if(session('error'))
+        <div class="p-4 mb-4 text-sm text-white rounded-lg bg-pink-500" role="alert">
+            <span class="font-medium">{{ session('error') }} > <a class="underline text-white" href="/login">Login</a></span>
+        </div>
+    @endif
+
+
     <div class="mt-10 my-12 px-0 py-4 flex justify-between">
         <div>
             <h1 class="text-2xl font-medium">Dashboard</h1>
@@ -288,5 +296,7 @@
             </table>        
         </div>
     </div>
+
+   
   
 @endsection
