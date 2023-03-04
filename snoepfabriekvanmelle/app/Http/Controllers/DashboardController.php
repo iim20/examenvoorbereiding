@@ -33,4 +33,15 @@ class DashboardController extends Controller
             'afgehandeldStoringen' => $afgehandeldStoringen
         ]);
     }
+    public function update(Request $request, $id)
+    {
+        $storing = Storing::findOrFail($id);
+        $storing->machine_id = $request->machine_id;
+        $storing->statusniveau_id = $request->statusniveau_id;
+        $storing->statusupdate_id = 3;
+        $storing->description = $request->description;
+        $storing->save();
+        return redirect('/')->with('error', 'Storing is afgehandeld!');
+    }
+
 }
