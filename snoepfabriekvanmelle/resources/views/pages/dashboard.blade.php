@@ -177,24 +177,24 @@
                                 <td class="px-6 py-4">
                                     <div class="flex items-center">
                                         @if($storing->statusniveau->niveaunaam == 'minor')
-                                            <div class="capitalize w-20 p-2 text-center rounded-2 border-2 border-black mr-2 text-black">
+                                            <div class="capitalize w-20 p-2 text-center rounded-md bg-stone-400 bg-opacity-50 mr-2 text-black">
                                                 {{ $storing->statusniveau->niveaunaam }}
                                             </div>
                                         @elseif($storing->statusniveau->niveaunaam == 'major')
                                             <div class="flex items-center">
-                                                <div class="capitalize w-20 p-2 text-center rounded-2 border-2 border-blue mr-2 text-black">
+                                                <div class="capitalize w-20 p-2 text-center rounded-md bg-sky-200 bg-opacity-100 mr-2 text-black">
                                                     {{ $storing->statusniveau->niveaunaam }}
                                                 </div>
                                             </div>
                                         @elseif($storing->statusniveau->niveaunaam == 'trivial')
                                             <div class="flex items-center">
-                                                <div class="capitalize w-20 p-2 text-center rounded-2 border-2 border-green-600 mr-2 text-black">
+                                                <div class="capitalize w-20 p-2 text-center rounded-md bg-emerald-300 bg-opacity-50 mr-2 text-black">
                                                     {{ $storing->statusniveau->niveaunaam }}
                                                 </div>
                                             </div>
                                         @else
                                             <div class="flex items-center">
-                                                <div class="capitalize w-20 p-2 text-center rounded-2 border-2 border-red-600 mr-2 text-black">
+                                                <div class="capitalize w-20 p-2 text-center rounded-md bg-red-300 bg-opacity-30 mr-2 text-black">
                                                     {{ $storing->statusniveau->niveaunaam }}
                                                 </div>
                                             </div>
