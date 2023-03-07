@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreFormRequest;
 use App\Models\Storing;
 use Attribute;
 use Illuminate\Http\Request;
@@ -29,7 +30,7 @@ class StoringController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreFormRequest $request)
     {
         $description = $request->input('description');
         $machineId = $request->input('machine_id');
