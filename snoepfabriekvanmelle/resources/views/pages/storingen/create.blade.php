@@ -55,7 +55,9 @@
             </div>
 
             <div class="form-control flex flex-col space-y-2">
-                <label class="font-semibold" for="medewerker_id">Medewerker</label>
+                <label class="font-semibold" for="medewerker_id">Medewerker
+                    <sup>*</sup>
+                </label>
                 <select class="pl-4 border border-indigo-500 rounded-md h-12" name="medewerker_id" id="medewerker_id">
                     @foreach(\App\Models\Medewerker::all() as $medewerker)
                         <option 
@@ -70,7 +72,9 @@
                 @enderror
             </div>
             <div class="form-control flex flex-col space-y-2">
-                <label class="font-semibold" for="description">Omschrijving</label>
+                <label class="font-semibold" for="description">Omschrijving
+                <sup>*</sup>
+                </label>
                 <textarea class="pl-4 pt-4 rounded-md border border-indigo-500" value="{{ old('description') }}" name="description" id="description" cols="30" rows="6"></textarea>
                 @error('description')
                     <p class="text-red-600 text-xs mt-2">{{ $message }}</p>
