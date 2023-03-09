@@ -25,4 +25,9 @@ class Storing extends Model
     {
         return $this->belongsTo(Machine::class);
     }
+
+    public function medewerker()
+    {
+        return $this->belongsTo(Medewerker::class);
+    }
 }

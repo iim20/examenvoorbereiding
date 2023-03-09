@@ -38,6 +38,9 @@
                         Omschrijving
                     </th>
                     <th scope="col" class="px-6 py-3">
+                        Medewerker
+                    </th>
+                    <th scope="col" class="px-6 py-3">
                         Locatie
                     </th>
                     <th scope="col" class="px-6 py-3">
@@ -84,6 +87,9 @@
                             <td class="px-6 py-4 w-[600px]">
                                {{ $storing->description}}
                             </td> 
+                            <td class="px-6 py-4 capitalize">
+                                {{ $storing->medewerker->naam}}
+                            </td>
                             <td class="px-6 py-4 capitalize">
                                 {{ $storing->machine->locatie->naam}}
                             </td>

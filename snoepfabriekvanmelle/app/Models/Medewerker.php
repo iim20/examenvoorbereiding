@@ -9,4 +9,9 @@ class Medewerker extends Model
 {
     use HasFactory;
     protected $table= ('medewerkers');
+
+    public function storingen()
+    {
+        return $this->hasMany(Storing::class);
+    }
 }

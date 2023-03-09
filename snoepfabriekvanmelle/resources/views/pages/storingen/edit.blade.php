@@ -45,6 +45,20 @@
                     </select>
                 </div>
             </div>
+
+            <div class="form-control flex flex-col space-y-2">
+                <label class="font-semibold" for="medewerker_id">Medewerker</label>
+                <select class="pl-4 border border-indigo-500 rounded-md h-12" name="medewerker_id" id="medewerker_id">
+                    @foreach(\App\Models\Medewerker::all() as $medewerker)
+                        <option 
+                            value="{{ $medewerker->id }}"
+                            {{ old('medewerker_id', $storing->medewerker_id) == $medewerker->id ? 'selected' : ''}}> 
+                            {{ ucwords($medewerker->naam) }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
             <div class="form-control flex flex-col space-y-2">
                 <label class="font-semibold" for="description">Omschrijving</label>
                 <textarea class="pl-1 pt-4 block w-full rounded-md border border-indigo-500" name="description" id="description" cols="30" rows="6">

@@ -9,7 +9,10 @@ use App\Models\Machine;
 use App\Models\Medewerker;
 use App\Models\Statusniveau;
 use App\Models\Statusupdate;
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Str;
+
 
 class DatabaseSeeder extends Seeder
 {
@@ -22,7 +25,24 @@ class DatabaseSeeder extends Seeder
 
         // \App\Models\User::factory(10)->create();
         // \App\Models\Machine::factory(6)->create();
-
+        User::create([
+            'id' => '1',
+            'name' => 'Ilyas Mohamed',
+            'email' => 'maxa_med_2@hotmail.com',
+            'email_verified_at' => now(),
+            'password' => '$2y$10$afcdjqPGfsjQLzz2.sRpVOsCHMjN6ydvF1Q6ebaULj8XFofQT5W2q',
+            'role' => 'admin',
+            'remember_token' => Str::random(10)
+        ]);
+        User::create([
+            'id' => '2',
+            'name' => 'Elli student',
+            'email' => 'd206947@edu.curio.nl',
+            'email_verified_at' => now(),
+            'password' => '$2y$10$afcdjqPGfsjQLzz2.sRpVOsCHMjN6ydvF1Q6ebaULj8XFofQT5W2q',
+            'role' => 'standaard',
+            'remember_token' => Str::random(10)
+        ]);
         Locatie::create([
             'id' => '1',
             'naam' => 'werkruimte alpha',
@@ -66,11 +86,13 @@ class DatabaseSeeder extends Seeder
         ]);
         Medewerker::create([
             'naam' => 'Ilyas',
-            'locatie_id' => '1'
+            'locatie_id' => '1',
+            'positie' => 'voorman'
         ]);
         Medewerker::create([
             'naam' => 'Mike',
-            'locatie_id' => '3'
+            'locatie_id' => '3',
+            'positie' => 'monteur'
         ]);
         Statusniveau::create([
             'niveaunaam' => 'Major',
