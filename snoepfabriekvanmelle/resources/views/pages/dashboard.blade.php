@@ -7,9 +7,23 @@
             <span class="font-medium">{{ session('error') }} > <a class="underline text-white" href="/login">Login</a></span>
         </div>
     @endif
+    
+    <!-- Users -->
+    @if(auth()->check())
+            <div class="flex justify-center space-x-3">
+
+                <h1 class="text-3xl text-center mt-4">Hallo </h1>
+                <h1 class="text-3xl bg-blue p-2 text-white -skew-y-3 w-fit">
+                    {{ auth()->user()->name }}
+                </h1>
+            </div>
+    @else
+        <span class="hidden"></span>
+    @endif
 
 
-    <div class="mt-10 my-12 px-0 py-4 flex justify-between">
+
+    <div class="mt-2 mb-12 px-0 py-4 flex justify-between">
         <div>
             <h1 class="text-2xl font-medium">Dashboard</h1>
         </div>
@@ -114,6 +128,9 @@
                             Omschrijving
                         </th>
                         <th scope="col" class="px-6 py-3">
+                            Medewerker
+                        </th>
+                        <th scope="col" class="px-6 py-3">
                             Locatie
                         </th>
                         <th scope="col" class="px-6 py-3">
@@ -170,6 +187,9 @@
                                 </th>
                                 <td class="px-6 py-4 w-[500px]">
                                    {{ $storing->description}}
+                                </td>
+                                <td class="px-6 py-4 capitalize">
+                                    {{ $storing->medewerker->naam}}
                                 </td> 
                                 <td class="px-6 py-4 capitalize">
                                     {{ $storing->machine->locatie->naam}}
@@ -220,7 +240,9 @@
                                 </td>
                            
                             </tr>
+                            
                         @endforeach
+                        
                     @else
                         <tr>
                             <td colspan="5" class="px-6 py-4 text-center">Alle storingen zijn afgehandeld, kijk naar 
@@ -231,8 +253,39 @@
                         </tr>
                     @endif
                 </tbody>
-            </table>        
+                
+
+            </table> 
+
+           
+        
         </div>
+
+        <nav aria-label="Page navigation example pt-10">
+              <ul class="inline-flex -space-x-px absolute top-full right-[4%]">
+                <li>
+                  <a href="#" class="px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
+                </li>
+                <li>
+                  <a href="#" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">1</a>
+                </li>
+                <li>
+                  <a href="#" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">2</a>
+                </li>
+                <li>
+                  <a href="#" aria-current="page" class="px-3 py-2 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">3</a>
+                </li>
+                <li>
+                  <a href="#" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">4</a>
+                </li>
+                <li>
+                  <a href="#" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">5</a>
+                </li>
+                <li>
+                  <a href="#" class="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
+                </li>
+              </ul>
+            </nav>
     @endauth
 
     <div id="historie" class="mt-16">
@@ -246,6 +299,9 @@
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Omschrijving
+                        </th>
+                        <th scope="col" class="px-6 py-3">
+                            Medewerker
                         </th>
                         <th scope="col" class="px-6 py-3">
                             Locatie
@@ -265,12 +321,13 @@
                                 </th>
                                 <td class="px-6 py-4 w-[500px]">
                                    {{ $afgehandeldStoring->description}}
-                                </td> 
+                                </td>
+                                <td class="px-6 py-4 capitalize">
+                                    {{ $afgehandeldStoring->medewerker->naam}}
+                                </td>  
                                 <td class="px-6 py-4 capitalize">
                                     {{ $afgehandeldStoring->machine->locatie->naam}}
                                 </td>
-                               
-
                                 <td>
                                     <div class="flex items-center">
                                         <div class="flex items-center">
