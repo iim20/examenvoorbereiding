@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreFormRequest;
+use App\Models\Medewerker;
 use App\Models\Storing;
 use Attribute;
 use Illuminate\Http\Request;
@@ -36,17 +37,31 @@ class StoringController extends Controller
         $machineId = $request->input('machine_id');
         $statusniveauId = $request->input('statusniveau_id');
         $statusupdateId = $request->input('statusupdate_id');
-        
+        $medewerkerId = $request->input('medewerker_id');
+    
+        // Check if the status is critical and if the medewerker is a voorman
+        if ($statusniveauId === '3') {
+            $voormanMedewerker = Medewerker::where('positie', '=', 'voorman')->where('id', '=', $medewerkerId)->exists();
+            if (!$voormanMedewerker) {
+                // Show error message
+                return back()->withErrors(['statusniveau_id' => 'Only voorman can create a critical storing']);
+            }
+        }
+    
+        // Save the storing
         $storing = new Storing();
         $storing->machine_id = $machineId;
         $storing->statusniveau_id = $statusniveauId;
         $storing->statusupdate_id  = $statusupdateId;
+        $storing->medewerker_id  = $medewerkerId;
         $storing->description = $description;
-
+    
         $storing->save();
-
+    
         return redirect('/storingen')->with('success', 'Storing created successfully!');
     }
+    
+    
 
     /**
      * Display the specified resource.
@@ -74,6 +89,7 @@ class StoringController extends Controller
         $storing->machine_id = $request->machine_id;
         $storing->statusniveau_id = $request->statusniveau_id;
         $storing->statusupdate_id = $request->statusupdate_id;
+        $storing->medewerker_id = $request->medewerker_id;
         $storing->description = $request->description;
         $storing->save();
         return redirect('/')->with('success', 'Storing is updated!');
