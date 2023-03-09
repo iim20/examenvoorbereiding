@@ -16,7 +16,7 @@ class StoringController extends Controller
      */
     public function index()
     {
-        $storingen = Storing::where('statusupdate_id', '<>', 3)->get();
+        $storingen = Storing::where('statusupdate_id', '<>', 3)->paginate(10);
         return view('pages.storingen.index', compact('storingen'));
     }
 

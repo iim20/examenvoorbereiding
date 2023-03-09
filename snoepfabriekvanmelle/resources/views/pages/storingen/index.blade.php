@@ -147,6 +147,9 @@
                     </tr>
                 @endif
             </tbody>
-        </table>        
+        </table> 
     </div>
+    <div>
+        {{ $storingen->links('pagination::tailwind') }}
+    </div>       
 @endsection

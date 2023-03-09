@@ -21,8 +21,8 @@ class DashboardController extends Controller
         
         $aantalAfgehandeldStoringen = Storing::where('statusupdate_id', '=', DB::raw('(SELECT id FROM statusupdate WHERE updatenaam = "afgehandeld")')) ->count();
        
-        $storingen = Storing::where('statusupdate_id', '<>', 3)->get();
-        $afgehandeldStoringen = Storing::where('statusupdate_id', '=', 3)->get();
+        $storingen = Storing::where('statusupdate_id', '<>', 3)->paginate(4);
+        $afgehandeldStoringen = Storing::where('statusupdate_id', '=', 3)->paginate(4);
 
         
         return view('pages.dashboard', [
