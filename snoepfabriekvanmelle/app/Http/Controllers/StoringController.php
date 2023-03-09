@@ -85,6 +85,16 @@ class StoringController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $statusniveauId = $request->statusniveau_id;
+        $medewerkerId = $request->medewerker_id;
+        // Check if the status is critical and if the medewerker is a voorman
+        if ($statusniveauId === '3') {
+            $voormanMedewerker = Medewerker::where('positie', '=', 'voorman')->where('id', '=', $medewerkerId)->exists();
+            if (!$voormanMedewerker) {
+                // Show error message
+                return back()->withErrors(['statusniveau_id' => 'Only voorman can be assigned to critical storing']);
+            }
+        }
         $storing = Storing::findOrFail($id);
         $storing->machine_id = $request->machine_id;
         $storing->statusniveau_id = $request->statusniveau_id;

@@ -57,6 +57,9 @@
                         </option>
                     @endforeach
                 </select>
+                @error('statusniveau_id')
+                    <p class="text-red-600 text-xs mt-2">{{ $message }}</p>
+                @enderror
             </div>
 
             <div class="form-control flex flex-col space-y-2">
