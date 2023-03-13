@@ -1,0 +1,12 @@
+\Illuminate\Support\Facades\DB::listen(function ($query){
+            logger($query->sql);
+        });
+
+
+In a Laravel project, the code \Illuminate\Support\Facades\DB::listen(function ($query){ logger($query->sql); }); sets up a listener for all database queries executed using the DB facade.
+
+The listen() method allows you to register a listener that will be called each time a database query is executed. In this case, the listener is a closure that takes a single parameter $query representing the query that was executed.
+
+Inside the closure, the logger() function is called to log the SQL statement of the query. The logger() function is a helper function provided by Laravel that logs a message to the application's log files.
+
+By using this code, you can monitor and log all the SQL queries that are executed by your Laravel application, which can be useful for debugging and performance optimization.

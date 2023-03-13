@@ -1,0 +1,5 @@
+-> Userstories moet op een bepaalde template hebben
+	Als __ wil ik___ zodat ik___
+-> Acceptatie criterie moet per user stories
+-> Wireframe moet niet over een static site, die moet over bepaalde functionaliteit
+->Activiteit diagram moet een titel hebben, liever per functionaliteit een AD aanmaken
