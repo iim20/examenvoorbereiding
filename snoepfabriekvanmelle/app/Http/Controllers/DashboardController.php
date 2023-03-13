@@ -10,29 +10,37 @@ class DashboardController extends Controller
 {
     public function index()
     {
-        // Status update
+        // \Illuminate\Support\Facades\DB::listen(function ($query){
+        //     logger($query->sql, $query->bindings);
+        // });
 
+        // Status update
         $totaleStoringen = Storing::count();
         $openStoringen = Storing::whereIn('statusupdate_id', function ($query) {
             $query->select('id')
-            ->from('statusupdate')
-            ->whereIn('updatenaam', ['open', 'in behandeling']);
-        })  ->count();
+                ->from('statusupdate')
+                ->whereIn('updatenaam', ['open', 'in behandeling']);
+        })->count();
+        $aantalAfgehandeldStoringen = Storing::where('statusupdate_id', '=', DB::raw('(SELECT id FROM statusupdate WHERE updatenaam = "afgehandeld")'))->count();
         
-        $aantalAfgehandeldStoringen = Storing::where('statusupdate_id', '=', DB::raw('(SELECT id FROM statusupdate WHERE updatenaam = "afgehandeld")')) ->count();
-       
-        $storingen = Storing::where('statusupdate_id', '<>', 3)->paginate(4);
-        $afgehandeldStoringen = Storing::where('statusupdate_id', '=', 3)->paginate(4);
+        // get the storingen and afgehandeldStoringen, sorted by the requested column and direction
+        $storingen = Storing::where('statusupdate_id', '<>', 3)
+                        ->orderBy('statusniveau_id', 'desc')
+                        ->paginate(4);
+        $afgehandeldStoringen = Storing::where('statusupdate_id', '=', 3)
+                        ->orderBy('statusniveau_id', 'asc')
+                        ->paginate(4);
 
-        
         return view('pages.dashboard', [
             'totaleStoringen' => $totaleStoringen,
             'openStoringen' => $openStoringen,
             'aantalAfgehandeldStoringen' => $aantalAfgehandeldStoringen,
             'storingen' => $storingen,
-            'afgehandeldStoringen' => $afgehandeldStoringen
+            'afgehandeldStoringen' => $afgehandeldStoringen,
+     
         ]);
     }
+
     public function update(Request $request, $id)
     {
         $storing = Storing::findOrFail($id);

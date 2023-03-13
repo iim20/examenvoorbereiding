@@ -16,9 +16,49 @@ class StoringController extends Controller
      */
     public function index()
     {
-        $storingen = Storing::where('statusupdate_id', '<>', 3)->paginate(10);
+        $query = 'SELECT storingen.id , storingen.naam, medewerker.naam, statusupdate.name, statusniveau.name 
+                   FROM storingen
+                   INNER JOIN medewerkers on medewerkers.id = storingen.medewerker_id
+                   INNER JOIN statusupdates on statusupdates.id = storingen.statusupdate_id
+                   INNER JOIN statusniveau on statusniveau.id = storingen.statusniveau_id
+                   WHERE statusupdate_id <> 3';
+
+        $medewerker = request('medewerker');
+        $status_update = request('status_update');
+        $status_niveau = request('status_niveau');
+
+        $storingen = Storing::query();
+
+        if ($medewerker) {
+            $storingen->join('medewerkers', 'medewerkers.id', '=', 'storingen.medewerker_id')
+                      ->where('medewerkers.naam', $medewerker);
+        }
+
+        if ($status_update) {
+            $storingen->join('statusupdate', 'statusupdate.id', '=', 'storingen.statusupdate_id')
+                      ->where('statusupdate.updatenaam', $status_update);
+        }
+    
+        if ($status_niveau) {
+            $storingen->join('statusniveau', 'statusniveau.id', '=', 'storingen.statusniveau_id')
+                      ->where('statusniveau.niveaunaam', $status_niveau);
+        }
+        
+        $storingen = $storingen->where('statusupdate_id', '<>', 3)
+        ->orderBy('storingen.created_at', 'desc')
+        ->paginate(10, ['storingen.id as storingId', 'storingen.description', 'medewerker_id', 'machine_id', 'statusniveau_id', 'statusupdate_id' ]);
+        
+          // Append the filters to the pagination links
+        $storingen->appends([
+            'medewerker' => $medewerker,
+            'status_update' => $status_update,
+            'status_niveau' => $status_niveau,
+        ]);
+
         return view('pages.storingen.index', compact('storingen'));
+
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -66,9 +106,10 @@ class StoringController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Storing $storing)
+    public function show($id)
     {
-        //
+        $storing = Storing::findOrFail($id);
+        return view('pages.storingen.show', compact('storing'));
     }
 
     /**
@@ -76,7 +117,7 @@ class StoringController extends Controller
      */
     public function edit($id)
     {
-        $storing = Storing::find($id);
+        $storing = Storing::findOrFail($id);
         return view('pages.storingen.edit', compact('storing'));
     }
 

@@ -3,7 +3,7 @@
 @section('content')
 <h1 class="text-2xl mt-6 mb-10 font-medium">Edit storing</h1>
     <div class="border border-gray-400 p-10 pb-8">
-        <form class="space-y-8" method="POST" action="/storingen/{{ $storing->id }}">
+        <form class="space-y-8" method="POST" action="{{ route('storingen.update', $storing) }}">
             @csrf
             @method('PATCH')
 
@@ -64,9 +64,7 @@
 
             <div class="form-control flex flex-col space-y-2">
                 <label class="font-semibold" for="description">Omschrijving</label>
-                <textarea class="pl-1 pt-4 block w-full rounded-md border border-indigo-500" name="description" id="description" cols="30" rows="6">
-                    {{ old('description', $storing->description) }}
-                </textarea>
+                <textarea class="pl-1 pt-4 block w-full rounded-md border border-indigo-500" name="description" id="description" cols="30" rows="6">{{ old('description', $storing->description) }}</textarea>
             </div>
             <div class="flex justify-end">
                 <button type="submit" class="capitalize mr-0 px-8 py-2 font-medium leading-6 w-44 rounded-lg bg-blue text-white">

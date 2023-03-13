@@ -38,16 +38,51 @@
                         Omschrijving
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Medewerker
+                        <form method="GET" action="{{ route('storingen.index') }}" id="filter-form">
+                            <div class="mb-4">
+                                <label class="block text-gray-700 font-bold mb-2" for="medewerker">
+                                    Filter by medewerkers:
+                                </label>
+                                <select class="form-select block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" id="medewerker" name="medewerker" onchange="this.form.submit()">
+                                    <option value="">All</option>
+                                    <option value="ilyas voorman" @if(request('medewerker') == 'ilyas voorman') selected @endif>Ilyas voorman</option>
+                                    <option value="mike" @if(request('medewerker') == 'mike') selected @endif>Mike</option>
+                                </select>
+                            </div>
+
                     </th>
                     <th scope="col" class="px-6 py-3">
                         Locatie
                     </th>
                     <th scope="col" class="px-6 py-3">
-                        Status niveau
-                    </th> <th scope="col" class="px-6 py-3">
-                        Statusupdate
+                        <div class="mb-4">
+                            <label class="block text-gray-700 font-bold mb-2" for="status_niveau">
+                                Filter by Status Niveau:
+                            </label>
+                            <select class="form-select block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" id="status_niveau" name="status_niveau">
+                                <option value="">All</option>
+                                <option value="minor"{{ request('status_niveau') == 'minor' ? ' selected' : '' }}>Minor</option>
+                                <option value="major"{{ request('status_niveau') == 'major' ? ' selected' : '' }}>Major</option>
+                                <option value="critical"{{ request('status_niveau') == 'critical' ? ' selected' : '' }}>Critical</option>
+                                <option value="trivial"{{ request('status_niveau') == 'trivial' ? ' selected' : '' }}>Trivial</option>
+                            </select>
+                        </div>
                     </th>
+                    <th scope="col" class="px-6 py-3">
+                            <div class="mb-4">
+                                <label class="block text-gray-700 font-bold mb-2" for="status_update">
+                                    Filter by Status Update:
+                                </label>
+                                <select class="form-select block w-full py-2 px-3 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm" id="status_update" name="status_update">
+                                    <option value="">All</option>
+                                    <option value="open"{{ request('status_update') == 'open' ? ' selected' : '' }}>Open</option>
+                                    <option value="in behandeling"{{ request('status_update') == 'in behandeling' ? ' selected' : '' }}>In behandeling</option>
+                                </select>
+                            </div>
+                            <input type="hidden" name="page" value="{{ $storingen->currentPage() }}">
+                        </form>
+                    </th>
+
                 </tr>
             </thead>
             <tbody>
@@ -56,7 +91,7 @@
                         <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
                             <td class="w-4 p-4">
                                 <div class="flex space-x-4">
-                                    <form action="{{ route('storingen.destroy', $storing->id)}}" method="POST">
+                                    <form action="{{ route('storingen.destroy', $storing->storingId)}}" method="POST">
                                         @csrf
                                         @method('DELETE')
                                         <button type="submit">
@@ -66,7 +101,7 @@
                                         </button>
                                     </form>
 
-                                    <a href="/storingen/{{ $storing->id }}/edit">
+                                    <a href="{{ route('storingen.edit', $storing->storingId) }}">
                                         <svg class="w-6 h-6" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <g clip-path="url(#clip0_12_19)">
                                             <path d="M11.6667 8.55166V11.6667C11.6667 11.9761 11.5438 12.2728 11.325 12.4916C11.1062 12.7104 10.8094 12.8333 10.5 12.8333H2.33335C2.02393 12.8333 1.72719 12.7104 1.5084 12.4916C1.2896 12.2728 1.16669 11.9761 1.16669 11.6667V3.49999C1.16669 3.19058 1.2896 2.89383 1.5084 2.67504C1.72719 2.45624 2.02393 2.33333 2.33335 2.33333H5.44835" stroke="#0040C0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
@@ -82,13 +117,19 @@
                                 </div>
                             </td>
                             <th scope="row" class="px-6 py-4  whitespace-nowrap w-32 dark:text-white">
-                                <div class="text-sm font-medium">{{ $storing->machine->naam}}</div>
+                                <div class="text-sm font-medium">
+                                    <a href="/storingen/{{$storing->storingId}}">
+                                        {{ $storing->machine->naam}}
+                                    </a>
+                                </div>
                             </th>
-                            <td class="px-6 py-4 w-[600px]">
+                            <td class="px-6 py-4 w-[450px]">
                                {{ $storing->description}}
                             </td> 
                             <td class="px-6 py-4 capitalize">
-                                {{ $storing->medewerker->naam}}
+                                <a href="{{ route('medewerkers.show', ['medewerker' => $storing->medewerker->id]) }}">
+                                    {{ $storing->medewerker->naam }}
+                                </a>
                             </td>
                             <td class="px-6 py-4 capitalize">
                                 {{ $storing->machine->locatie->naam}}

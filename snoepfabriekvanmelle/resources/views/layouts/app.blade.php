@@ -13,6 +13,7 @@
         <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;700&family=Tilt+Prism&display=swap" rel="stylesheet">
 
         <!-- Scripts -->
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-poppins mx-auto max-w-[93%]">
@@ -21,5 +22,13 @@
             @yield('content')         
         </div>
         @include('partials.footer')
+
+        <script>
+    // Listen for changes to the select elements
+    $('#status_niveau, #status_update, #medewerker').change(function() {
+        // Submit the form
+        $('#filter-form').submit();
+    });
+</script>
     </body>
 </html>
