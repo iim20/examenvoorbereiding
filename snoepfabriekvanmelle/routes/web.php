@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MedewerkerController;
 use App\Http\Controllers\StoringController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,9 +29,12 @@ Route::middleware('auth')->group(function () {
 
 });
 
-Route::get('/medewerkers', function () {
-    return view('pages.medewerkers');
-});
+Route::get('/medewerkers', [MedewerkerController::class, 'index'])->name('medewerkers.index');
+Route::get('/medewerkers/{medewerker}', [MedewerkerController::class, 'show'])->name('medewerkers.show');
+
+
+
+
 
 Route::fallback(function () {
     abort(404);

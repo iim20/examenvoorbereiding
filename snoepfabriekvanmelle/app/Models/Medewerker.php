@@ -14,4 +14,10 @@ class Medewerker extends Model
     {
         return $this->hasMany(Storing::class);
     }
+
+    public function locatie()
+{
+    return $this->belongsTo(Locatie::class, 'locatie_id');
+}
+
 }

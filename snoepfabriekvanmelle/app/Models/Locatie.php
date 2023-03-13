@@ -14,4 +14,10 @@ class Locatie extends Model
     {
         return $this->hasMany(Machine::class);
     }
+
+    public function medewerker()
+    {
+        return $this->belongsTo(Medewerker::class);
+    }
+    
 }
