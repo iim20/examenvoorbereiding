@@ -10,3 +10,36 @@ The listen() method allows you to register a listener that will be called each t
 Inside the closure, the logger() function is called to log the SQL statement of the query. The logger() function is a helper function provided by Laravel that logs a message to the application's log files.
 
 By using this code, you can monitor and log all the SQL queries that are executed by your Laravel application, which can be useful for debugging and performance optimization.
+
+
+public function store(Request $request)
+{
+    // Valideer de enquete gegevens
+    $request->validate([
+        'name' => 'required',
+        'description' => 'required',
+        'questions' => 'required|array|min:1',
+        'questions.*.text' => 'required',
+    ]);
+
+    // Maak de enquete aan
+    $enquete = Enquete::create([
+        'name' => $request->name,
+        'description' => $request->description,
+    ]);
+
+    // Maak de vragen aan en link ze aan de enquete
+    foreach ($request->questions as $questionData) {
+        $question = Question::create([
+            'text' => $questionData['text'],
+        ]);
+        EnqueteQuestion::create([
+            'enquete_id' => $enquete->id,
+            'question_id' => $question->id,
+        ]);
+    }
+
+    // Stuur een bevestigingsbericht terug naar de gebruiker
+    return response()->json([
+        'message' => 'Enquete succesvol opgeslagen.',
+    ]);
